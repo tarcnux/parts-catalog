@@ -9,7 +9,7 @@ import br.com.tarcnux.spring.jpa.postgresql.model.Part;
 public interface PartRepository extends JpaRepository<Part, Long>{
 	
 	List<Part> findByOrderByNameAsc();
-	List<Part> findByNameContaining(String name);
-	List<Part> findByapplicationVehicleContaining(String vehicle);
+	List<Part> findByNameContainingOrderByNameAsc(String name);
+	List<Part> findByapplicationVehicleContainingOrderByNameAsc(String vehicle);
 
 }

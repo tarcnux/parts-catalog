@@ -91,7 +91,7 @@ public class JPAUnitTest {
 		Part part4 = new Part("Tensor, Polia Desviadora e Kit de Distribuição", "Fusca", 9.87, 10.98);
 		entityManager.persist(part4);
 		
-		Iterable<Part> parts = repository.findByNameContaining("Polia");
+		Iterable<Part> parts = repository.findByNameContainingOrderByNameAsc("Polia");
 		assertThat(parts).hasSize(3).contains(part2, part3, part4);
 	}
 	
@@ -109,7 +109,7 @@ public class JPAUnitTest {
 		Part part4 = new Part("Tensor, Polia Desviadora e Kit de Distribuição", "Fusca", 9.87, 10.98);
 		entityManager.persist(part4);
 		
-		Iterable<Part> parts = repository.findByapplicationVehicleContaining("Mar");
+		Iterable<Part> parts = repository.findByapplicationVehicleContainingOrderByNameAsc("Mar");
 		assertThat(parts).hasSize(2).contains(part2, part3);
 	}
 	
