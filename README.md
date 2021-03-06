@@ -24,40 +24,46 @@ Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **P
 
 - ### **Pré-requisitos**
 
-  - É **necessário** possuir o **[Java 11](https://www.java.com/)** e **[Spring Boot](https://spring.io/)** instalados no computador.
+  - É **necessário** possuir o **[Java 11](https://www.java.com/)** .
   - É **necessário** possuir o **[Git](https://git-scm.com/)** instalado e configurado no computador.
-  - É **recomendável** utilizar **[IDE Eclipse com Spring Tools Suite 4](https://spring.io/tools)** .
- 
+  - É **recomendável** utilizar **[IDE Spring Tools Suite 4](https://spring.io/tools)** .
 
 1. Faça um clone do repositório:
-
-```sh
-  #  Crie um novo Workspace, uma pasta chamada: ws-github-teste
+```
+  #  Crie um novo Workspace, por exemplo uma pasta chamada: 
+     ws-github-teste
+  
   $ md ws-github-teste
   $ cd ws-github-teste
   $ git clone https://github.com/tarcnux/parts-catalog.git
 ```
 
 2. Executando a Aplicação:
-
 ```
-
   #  Abra o Spring Tool Suite (STS)
-  #  Selecione o Workspace: ws-github-teste
+  #  Selecione como Workspace a pasta recém clonada: 
+     parts-catalog
   #  Import projects - Maven - Existing Maven Projects
-  #  Root Directory: parts-catalog
+  #  Root Directory: ../parts-catalog/backend
   #  Clicar com o botão direito em src/main/java
   #  Procurar por "Run As" e ir na opção "5 Spring Boot App"
 ```
 3. Testando a Aplicação
 ```
   #  Estando no Spring Tool Suite (STS)
-  #  Clicar com o botão direito em src/main/java
+  #  Clicar com o botão direito no projeto
+     1 - Build Path
+     2 - Add Libraries
+     3 - JUnit
+     4 - Next
+     5 - Escolha JUnit 5
+     6 - Finish
+  #  Clicar com o botão direito em src/test/java
   #  Procurar por "Run As" e ir na opção "4 JUnit Test"
   
 ```
 ## Testes Unitários OK
-Importante ter a biblioteca do JUnit
+Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
 
 ![Testes Unitários Ok](https://github.com/tarcnux/parts-catalog/blob/main/junit5_parts_catalog.png?raw=true)
 
@@ -65,7 +71,7 @@ Importante ter a biblioteca do JUnit
 
 ![Ambiente de desenvolvimento](https://github.com/tarcnux/parts-catalog/blob/main/tarcnux_dev_environment.jpeg?raw=true)
 
-## Rotas da API - base: [/api/v1]
+## Rotas da API - base: /api/v1
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6da14daca04e6efcaf2b)
 
 |Métodos	| URLs			| Ações	|
