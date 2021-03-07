@@ -111,11 +111,11 @@ Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **P
 ## Testes Unitários OK
 Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
 
-![Testes Unitários Ok](https://github.com/tarcnux/parts-catalog/blob/main/junit5_parts_catalog.png?raw=true)
+![Testes Unitários Ok](https://github.com/tarcnux/parts-catalog/images/blob/main/junit5_parts_catalog.png?raw=true)
 
 ### E eu feliz com os testes passando todos
 
-![Ambiente de desenvolvimento](https://github.com/tarcnux/parts-catalog/blob/main/tarcnux_dev_environment.jpeg?raw=true)
+![Ambiente de desenvolvimento](https://github.com/tarcnux/parts-catalog/images/blob/main/tarcnux_dev_environment.jpeg?raw=true)
 
 # Front-end Vue.Js
 ##  :dizzy: Como Executar
@@ -149,7 +149,7 @@ Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
 ![Vue js App Component Diagram with Vue Router   Axios](https://user-images.githubusercontent.com/2284408/110176312-d9caeb00-7de1-11eb-866b-e9910f2544ad.png)
 
 ### 01 - Tela inicial sem peças cadastradas
-![Tela inicial](https://github.com/tarcnux/parts-catalog/blob/main/tela01_sem_parts_cadastradas.png?raw=true)
+![Tela inicial](https://github.com/tarcnux/parts-catalog/images/blob/main/tela01_sem_parts_cadastradas.png?raw=true)
 
 ### 02 - Tela com a listagem de peças cadastradas
  - Listagem em ordem alfabética pelo nome
@@ -157,26 +157,26 @@ Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
  - É possível buscar peças pelo veículo
  - É possível apagar uma peça ou todas
 
-![Tela de listagem de peças](https://github.com/tarcnux/parts-catalog/blob/main/tela02_listagem_de_parts.png?raw=true)
+![Tela de listagem de peças](https://github.com/tarcnux/parts-catalog/images/blob/main/tela02_listagem_de_parts.png?raw=true)
 
 ### 03 - Tela exibindo os detalhes de uma peça selecionada
  - É possível alterar os dados de uma peça selecionada
  
-![Tela de detalhes de uma peça](https://github.com/tarcnux/parts-catalog/blob/main/tela03_part_selecionada_exibindo_detalhes.png?raw=true)
+![Tela de detalhes de uma peça](https://github.com/tarcnux/parts-catalog/images/blob/main/tela03_part_selecionada_exibindo_detalhes.png?raw=true)
 
 ### 04 - Dados de uma peça para atualização
  - Campos obrigatórios: nome, peso líquido e peso bruto.
  - Se o peso líquido for maior que o peso bruto a peça não é atualizada e aparece mensagem de erro.
  - Números decimais com 2 casas depois da vírgula.
  - É possível excluir a peça selecionada.
-![Tela de atualização](https://github.com/tarcnux/parts-catalog/blob/main/tela04_part_data_to_update.png?raw=true)
+![Tela de atualização](https://github.com/tarcnux/parts-catalog/images/blob/main/tela04_part_data_to_update.png?raw=true)
 
 ### 05 - Tela de cadastro de uma nova peça
  - Campos obrigatórios: nome, peso líquido e peso bruto.
  - Se o peso líquido for maior que o peso bruto a peça não é atualizada e aparece mensagem de erro.
  - Números decimais com 2 casas depois da vírgula.
 
-![Tela de cadastro de uma nova peça](https://github.com/tarcnux/parts-catalog/blob/main/tela05_add_new_part.png?raw=true)
+![Tela de cadastro de uma nova peça](https://github.com/tarcnux/parts-catalog/images/blob/main/tela05_add_new_part.png?raw=true)
 
 ## :memo: ToDo
 
