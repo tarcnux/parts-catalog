@@ -25,10 +25,24 @@ Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **P
 
 - ### **Pré-requisitos**
 
-  - É **necessário** possuir o **[Java 11](https://www.java.com/)** .
-  - É **necessário** possuir o **[Git](https://git-scm.com/)** instalado e configurado no computador.
+  - É **necessário** possuir o **[Java 11](https://www.java.com/)** instalado e configurado no computador.
+  - É **necessário** possuir o banco de dados **[PostgreSQL](https://www.postgresql.org/)** instalado e configurado no computador, usuário e senha: postgres.
+  -  É **recomendável** utilizar **[pgAdmin](https://www.pgadmin.org/)**  para gerenciar mais facilmente o PostgreSQL.
+  - É **necessário** possuir o **[Git](https://git-scm.com/)** .
   - É **recomendável** utilizar **[IDE Spring Tools Suite 4](https://spring.io/tools)** .
 
+0. Criar o banco de dados PostgreSQL
+```
+# Acesse o pgAdmin em http://127.0.0.1/pgadmin4/browser/
+# Clique em Servers / Local > [ABRIR]
+# Clique com o botão direito em Database
+# Create Database
+# nome: partsCatalog
+# Owner: postgres - senha já cadastrada
+# Se suas informações estiverem diferentes veja na issue #16 
+  como proceder para configurar sua aplicação de acordo com 
+  seus dados.
+```
 1. Faça um clone do repositório:
 ```
   #  Crie um novo Workspace, por exemplo uma pasta chamada: 
@@ -52,7 +66,10 @@ Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **P
   #  Import projects - Maven - Existing Maven Projects
   #  Root Directory: ../parts-catalog/backend
   #  Clicar com o botão direito em src/main/java
-  #  Procurar por "Run As" e ir na opção "5 Spring Boot App"
+  #  Procurar por "Run As" e ir na opção "Spring Boot App"
+  #  Pode ignorar os erros, pois não afetam a aplicação. Mais
+     abaixo mostrarei como importar o JUnit e os erros 
+     desaparecem.
   #  Backend App rodando em:
   - Local:   http://localhost:8080
 ```
@@ -97,7 +114,7 @@ Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **P
 3. Testando a Aplicação
 ```
   #  Estando no Spring Tool Suite (STS)
-  #  Clicar com o botão direito no projeto
+  #  Clicar com o botão direito no projeto backend
      1 - Build Path
      2 - Add Libraries
      3 - JUnit
@@ -105,17 +122,17 @@ Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **P
      5 - Escolha JUnit 5
      6 - Finish
   #  Clicar com o botão direito em src/test/java
-  #  Procurar por "Run As" e ir na opção "4 JUnit Test"
+  #  Procurar por "Run As" e ir na opção "JUnit Test"
   
 ```
 ## Testes Unitários OK
 Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
 
-![Testes Unitários Ok](https://github.com/tarcnux/parts-catalog/images/blob/main/junit5_parts_catalog.png?raw=true)
+![Testes Unitários Ok](https://github.com/tarcnux/parts-catalog/blob/main/images/junit5_parts_catalog.png?raw=true)
 
 ### E eu feliz com os testes passando todos
 
-![Ambiente de desenvolvimento](https://github.com/tarcnux/parts-catalog/images/blob/main/tarcnux_dev_environment.jpeg?raw=true)
+![Ambiente de desenvolvimento](https://github.com/tarcnux/parts-catalog/blob/main/images/tarcnux_dev_environment.jpeg?raw=true)
 
 # Front-end Vue.Js
 ##  :dizzy: Como Executar
@@ -130,6 +147,10 @@ Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
   #  O repositório já foi clonado no passo 1 contendo as 
   #	 pastas backend e frontend: 
      $ .../ws-github-teste/parts-catalog
+  #  Depois de testar o back-end, lembre-se de colocar 
+     a API Spring Boot para rodar novamente. Ela deve
+     estar rodando para se conectar ao front-end.
+  #  Backend: http://localhost:8080/api/v1/parts
 ```
 
 5. Executando a Aplicação Front-end:
@@ -137,19 +158,27 @@ Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
   #  Estando na pasta criada no passo 1
   #  parts-catalog
   $ cd frontend
-  #  Instalação das dependências
-  $ npm install
+  #  Instalação das dependências - !!! Atenção para estar com 
+	 as permissões de root no Linux ou admin no Windows
+  $ sudo npm install
   #  Ativa o servidor e o hot-reload
   $ npm run serve
   # Frontend App rodando em:
-  - Local:   http://localhost:8081/
+  - Local:   http://localhost:8081/  
 ```
+#### PS: se der problemas no npm run serve, tentar isso:  
+-   Remove the  **local**  `node_modules`  &  `package-lock.json`
+-   Clean npm cache by  `npm cache verify`
+-   Update the  **global**  npm by  `sudo npm i -g npm`
+-   Reinstall the  **local**  `node_modules`  by  `npm i`
+
 ### Diagrama de Componentes do App Vue.js com o Vue Router e Axios
 
 ![Vue js App Component Diagram with Vue Router   Axios](https://user-images.githubusercontent.com/2284408/110176312-d9caeb00-7de1-11eb-866b-e9910f2544ad.png)
 
 ### 01 - Tela inicial sem peças cadastradas
-![Tela inicial](https://github.com/tarcnux/parts-catalog/images/blob/main/tela01_sem_parts_cadastradas.png?raw=true)
+![Tela inicial](https://github.com/tarcnux/parts-catalog/blob/main/images/tela01_sem_parts_cadastradas.png?raw=true)
+
 
 ### 02 - Tela com a listagem de peças cadastradas
  - Listagem em ordem alfabética pelo nome
@@ -157,26 +186,26 @@ Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
  - É possível buscar peças pelo veículo
  - É possível apagar uma peça ou todas
 
-![Tela de listagem de peças](https://github.com/tarcnux/parts-catalog/images/blob/main/tela02_listagem_de_parts.png?raw=true)
+![Tela de listagem de peças](https://github.com/tarcnux/parts-catalog/blob/main/images/tela02_listagem_de_parts.png?raw=true)
 
 ### 03 - Tela exibindo os detalhes de uma peça selecionada
  - É possível alterar os dados de uma peça selecionada
  
-![Tela de detalhes de uma peça](https://github.com/tarcnux/parts-catalog/images/blob/main/tela03_part_selecionada_exibindo_detalhes.png?raw=true)
+![Tela de detalhes de uma peça](https://github.com/tarcnux/parts-catalog/blob/main/images/tela03_part_selecionada_exibindo_detalhes.png?raw=true)
 
 ### 04 - Dados de uma peça para atualização
  - Campos obrigatórios: nome, peso líquido e peso bruto.
  - Se o peso líquido for maior que o peso bruto a peça não é atualizada e aparece mensagem de erro.
  - Números decimais com 2 casas depois da vírgula.
  - É possível excluir a peça selecionada.
-![Tela de atualização](https://github.com/tarcnux/parts-catalog/images/blob/main/tela04_part_data_to_update.png?raw=true)
+![Tela de atualização](https://github.com/tarcnux/parts-catalog/blob/main/images/tela04_part_data_to_update.png?raw=true)
 
 ### 05 - Tela de cadastro de uma nova peça
  - Campos obrigatórios: nome, peso líquido e peso bruto.
  - Se o peso líquido for maior que o peso bruto a peça não é atualizada e aparece mensagem de erro.
  - Números decimais com 2 casas depois da vírgula.
 
-![Tela de cadastro de uma nova peça](https://github.com/tarcnux/parts-catalog/images/blob/main/tela05_add_new_part.png?raw=true)
+![Tela de cadastro de uma nova peça](https://github.com/tarcnux/parts-catalog/blob/main/images/tela05_add_new_part.png?raw=true)
 
 ## :memo: ToDo
 
