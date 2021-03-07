@@ -48,9 +48,9 @@ public class PartController {
 			if (name == null && vehicle == null) {
 				partRepository.findByOrderByNameAsc().forEach(parts::add);
 			} else if (vehicle == null) {
-				partRepository.findByNameContainingOrderByNameAsc(name).forEach(parts::add);
+				partRepository.findByNameContainingIgnoreCaseOrderByNameAsc(name).forEach(parts::add);
 			} else {
-				partRepository.findByapplicationVehicleContainingOrderByNameAsc(vehicle).forEach(parts::add);
+				partRepository.findByapplicationVehicleContainingIgnoreCaseOrderByNameAsc(vehicle).forEach(parts::add);
 			}
 			
 			if(parts.isEmpty()) {
