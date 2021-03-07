@@ -16,20 +16,27 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tarcnux.spring.jpa.postgresql.model.Part;
 import br.com.tarcnux.spring.jpa.postgresql.repository.PartRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/v1")
+@Api(value = "Part")
 public class PartController {
 	
 	@Autowired
 	PartRepository partRepository;
 	
 	@GetMapping("/parts")
+	@ApiOperation(value = "Exibe todas as peças em ordem alfabética")
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Part>> getAllParts(
 			@RequestParam(required = false) String name, 
 			@RequestParam(required = false) String vehicle) {
@@ -59,6 +66,8 @@ public class PartController {
 	}
 	
 	@GetMapping("/parts/{id}")
+	@ApiOperation(value = "Exibe uma peça específica")
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Part> getPartById(@PathVariable("id") Long id) {
 		Optional<Part> partData = partRepository.findById(id);
 		
@@ -70,6 +79,9 @@ public class PartController {
 	}
 	
 	@PostMapping("/parts")
+	@ApiOperation(value = "Cadastra uma peça")
+	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseBody
 	public ResponseEntity<Part> createPart(@RequestBody Part part) {
 		try {
 			Part _part = partRepository
@@ -86,6 +98,9 @@ public class PartController {
 	}
 	
 	@PutMapping("/parts/{id}")
+	@ApiOperation(value = "Atualiza uma peça específica")
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
 	public ResponseEntity<Part> updatePart(
 			@PathVariable("id") Long id,
 			@RequestBody Part part
@@ -105,6 +120,8 @@ public class PartController {
 	}
 	
 	@DeleteMapping("/parts/{id}")
+	@ApiOperation(value = "Exclui uma peça")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<HttpStatus> deletePart(@PathVariable("id") Long id) {
 		try {
 			partRepository.deleteById(id);
@@ -115,6 +132,8 @@ public class PartController {
 	}
 	
 	@DeleteMapping("/parts")
+	@ApiOperation(value = "Exclui todas as peças")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<HttpStatus> deleteAllParts() {
 		try {
 			partRepository.deleteAll();
@@ -123,6 +142,5 @@ public class PartController {
 			return new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 
 }
