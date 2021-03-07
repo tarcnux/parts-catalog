@@ -4,32 +4,33 @@
     <div class="col-md-8">
 
       <div class="input-group mb-3">
-        <input type="text" class="form-control"
+        <input 
+            type="text" 
+            class="form-control"
             placeholder="Buscar por nome"
             v-model="name"/>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button"
             @click="searchByName">
-            Busca por nome
+            Buscar
           </button>
         </div>
       </div>
 
-      <div class="input-group mb-3 ml-2">
+      <div class="input-group mb-3">
         <input type="text" class="form-control"
             placeholder="Buscar por veículo de aplicação"
             v-model="applicationVehicle"/>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button"
             @click="searchByApplicationVehicle">
-            Busca por veículo de aplicação
+            Buscar
           </button>
         </div>
       </div>
-
-
     </div>
-    <div class="col-md-4">
+
+    <div class="col-md-6">
       <h4>Listagem de Peças</h4>
       <ul class="list-group">
         <li class="list-group-item"
@@ -53,6 +54,7 @@
         Apagar todas as peças
       </button>
     </div>
+
     <div class="col-md-6">
       <div v-if="currentPart">
         <h4>Peça</h4>
@@ -70,7 +72,7 @@
         </div>
 
         <a class="badge badge-warning"
-          :href="'/parts/' + currentPart.id"
+          :href="'/api/v1/parts/' + currentPart.id"
         >
           Alterar
         </a>
@@ -117,6 +119,8 @@ export default {
 
     setActivePart(part, index) {
       this.currentPart = part;
+      this.currentPart.netWeight = parseFloat(part.netWeight).toFixed(2);
+      this.currentPart.grossWeight = parseFloat(part.grossWeight).toFixed(2);
       this.currentIndex = index;
     },
 
@@ -175,5 +179,9 @@ export default {
   text-align: left;
   max-width: 1024px;
   margin: auto;
+}
+
+.active {
+    background-color: #e77924 !important;
 }
 </style>
