@@ -75,7 +75,10 @@ export default {
       PartDataService.get(id)
         .then(response => {
           this.currentPart = response.data;
+          this.currentPart.netWeight = parseFloat(response.data.netWeight).toFixed(2)
+          this.currentPart.grossWeight = parseFloat(response.data.grossWeight).toFixed(2)
           console.log(response.data);
+          
         })
         .catch(e => {
           console.error(e);
