@@ -72,7 +72,7 @@
         </div>
 
         <a class="badge badge-warning"
-          :href="'/api/v1/parts/' + currentPart.id"
+          :href="'/parts/' + currentPart.id"
         >
           Alterar
         </a>

@@ -46,7 +46,8 @@
         type="number"
         class="form-control"
         id="netWeight"
-        required
+        placeholder="0.00" step="0.01"    
+        value="0.00" required
         v-model="part.netWeight"
         name="netWeight"
       />
@@ -58,13 +59,14 @@
         type="number"
         class="form-control"
         id="grossWeight"
-        required
+        placeholder="0.00" step="0.01"
+        value="0.00" required
         v-model="part.grossWeight"
         name="grossWeight"
       />
     </div>
 
-      <button @click="saveTutorial" class="btn btn-success">Cadastrar</button>
+      <button @click="savePart" class="btn btn-success">Cadastrar</button>
     </div>
 
     <div v-else>
@@ -87,8 +89,8 @@ export default {
         id: null,
         name: "",
         applicationVehicle: "",
-        netWeight: 0.0,
-        grossWeight: 0.0
+        netWeight: "",
+        grossWeight: ""
       },
       submitted: false,
       errors: []
@@ -147,9 +149,9 @@ export default {
       }
     },
     
-    newTutorial() {
+    newPart() {
       this.submitted = false;
-      this.tutorial = {};
+      this.part = {};
     }
   }
 };
