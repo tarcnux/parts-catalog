@@ -19,7 +19,8 @@ Recursos disponíveis na API
 O CRUD usa um ambiente de testes unitários com **JUnit** configurado acessando o **banco de dados H2**, usa **Maven** como gerenciador de dependência, e **Java 11** como linguagem.
 
 Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **PostgreSQL**
-    
+
+# Back-end Java Spring Boot
 ##  :dizzy: Como Executar
 
 - ### **Pré-requisitos**
@@ -33,9 +34,14 @@ Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **P
   #  Crie um novo Workspace, por exemplo uma pasta chamada: 
      ws-github-teste
   
-  $ md ws-github-teste
+  $ mkdir ws-github-teste
   $ cd ws-github-teste
   $ git clone https://github.com/tarcnux/parts-catalog.git
+  # Foi criada a pasta parts-catalog
+  # cd parts-catalog
+  # Dentro há duas pastas:
+   - backend
+   - frontend
 ```
 
 2. Executando a Aplicação Back-end:
@@ -47,6 +53,8 @@ Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **P
   #  Root Directory: ../parts-catalog/backend
   #  Clicar com o botão direito em src/main/java
   #  Procurar por "Run As" e ir na opção "5 Spring Boot App"
+  #  Backend App rodando em:
+  - Local:   http://localhost:8080
 ```
 ### Swagger http://localhost:8080/swagger-ui.html
 ![Swagger Validator](https://img.shields.io/swagger/valid/3.0?specUrl=https%3A%2F%2Fraw.githubusercontent.com%2Ftarcnux%2Fparts-catalog%2Fmain%2Fapi-docs-swagger.json)
@@ -109,7 +117,74 @@ Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
 
 ![Ambiente de desenvolvimento](https://github.com/tarcnux/parts-catalog/blob/main/tarcnux_dev_environment.jpeg?raw=true)
 
-## :memo: Licença
+# Front-end Vue.Js
+##  :dizzy: Como Executar
+- ### **Pré-requisitos**
+
+  - É **necessário** possuir o **[Node.js® ](https://nodejs.org/pt-br/)** instalado e configurado no computador.
+  - É **necessário** possuir o **[NPM](https://nodejs.org/pt-br/)** .
+  - É **recomendável** utilizar **[IDE VSCode](https://code.visualstudio.com/)** .
+
+4. Repositório já clonado:
+```
+  #  O repositório já foi clonado no passo 1 contendo as 
+  #	 pastas backend e frontend: 
+     $ .../ws-github-teste/parts-catalog
+```
+
+5. Executando a Aplicação Front-end:
+```
+  #  Estando na pasta criada no passo 1
+  #  parts-catalog
+  $ cd frontend
+  #  Instalação das dependências
+  $ npm install
+  #  Ativa o servidor e o hot-reload
+  $ npm run serve
+  # Frontend App rodando em:
+  - Local:   http://localhost:8081/
+```
+### Diagrama de Componentes do App Vue.js com o Vue Router e Axios
+
+![Vue js App Component Diagram with Vue Router   Axios](https://user-images.githubusercontent.com/2284408/110176312-d9caeb00-7de1-11eb-866b-e9910f2544ad.png)
+
+### 01 - Tela inicial sem peças cadastradas
+![Tela inicial](https://github.com/tarcnux/parts-catalog/blob/main/tela01_sem_parts_cadastradas.png?raw=true)
+
+### 02 - Tela com a listagem de peças cadastradas
+ - Listagem em ordem alfabética pelo nome
+ - É possível buscar peças pelo nome 
+ - É possível buscar peças pelo veículo
+ - É possível apagar uma peça ou todas
+
+![Tela de listagem de peças](https://github.com/tarcnux/parts-catalog/blob/main/tela02_listagem_de_parts.png?raw=true)
+
+### 03 - Tela exibindo os detalhes de uma peça selecionada
+ - É possível alterar os dados de uma peça selecionada
+ 
+![Tela de detalhes de uma peça](https://github.com/tarcnux/parts-catalog/blob/main/tela03_part_selecionada_exibindo_detalhes.png?raw=true)
+
+### 04 - Dados de uma peça para atualização
+ - Campos obrigatórios: nome, peso líquido e peso bruto.
+ - Se o peso líquido for maior que o peso bruto a peça não é atualizada e aparece mensagem de erro.
+ - Números decimais com 2 casas depois da vírgula.
+ - É possível excluir a peça selecionada.
+![Tela de atualização](https://github.com/tarcnux/parts-catalog/blob/main/tela04_part_data_to_update.png?raw=true)
+
+### 05 - Tela de cadastro de uma nova peça
+ - Campos obrigatórios: nome, peso líquido e peso bruto.
+ - Se o peso líquido for maior que o peso bruto a peça não é atualizada e aparece mensagem de erro.
+ - Números decimais com 2 casas depois da vírgula.
+
+![Tela de cadastro de uma nova peça](https://github.com/tarcnux/parts-catalog/blob/main/tela05_add_new_part.png?raw=true)
+
+## :memo: ToDo
+
+ - [ ] Criar uma segunda entidade **vehicle** no banco de dados e fazer o relacionamento entre elas. Ficaria a entidade **part** com um relacionamento de NxN com vehicle. Uma peça pode pertencer a vários veículos e um veículo pode conter várias peças.
+ - [ ] Criar endpoints no backend para manipular o relacionamento entre as entidades `vehicle` e `part`.
+ - [ ] Criar novas telas no frontend de manipulação e exibição das entidades `vehicle` e `part`e seus relacionamentos.
+
+## :page_with_curl: Licença
 
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 

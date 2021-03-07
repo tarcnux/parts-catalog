@@ -1,6 +1,6 @@
 <template>
   <div v-if="currentPart" class="edit-form">
-    <h4>Peça</h4>
+    <h4>Atualizar peça</h4>
     <form>
       
       <div class="form-group">
