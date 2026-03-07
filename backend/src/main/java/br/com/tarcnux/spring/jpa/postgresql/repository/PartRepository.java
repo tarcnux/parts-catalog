@@ -10,6 +10,6 @@ public interface PartRepository extends JpaRepository<Part, Long>{
 	
 	List<Part> findByOrderByNameAsc();
 	List<Part> findByNameContainingIgnoreCaseOrderByNameAsc(String name);
-	List<Part> findByapplicationVehicleContainingIgnoreCaseOrderByNameAsc(String vehicle);
+	List<Part> findByApplicationVehicleContainingIgnoreCaseOrderByNameAsc(String vehicle);
 
 }
