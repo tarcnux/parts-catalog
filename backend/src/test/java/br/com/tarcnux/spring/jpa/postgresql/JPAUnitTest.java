@@ -109,7 +109,7 @@ public class JPAUnitTest {
 		Part part4 = new Part("Tensor, Polia Desviadora e Kit de Distribuição", "Fusca", 9.87, 10.98);
 		entityManager.persist(part4);
 		
-		Iterable<Part> parts = repository.findByapplicationVehicleContainingIgnoreCaseOrderByNameAsc("Mar");
+		Iterable<Part> parts = repository.findByApplicationVehicleContainingIgnoreCaseOrderByNameAsc("Mar");
 		assertThat(parts).hasSize(2).contains(part2, part3);
 	}
 	
@@ -140,10 +140,10 @@ public class JPAUnitTest {
 		Part checkPart = repository.findById(part3.getId()).get();
 		
 		assertThat(checkPart.getId()).isEqualTo(part3.getId());
-		assertThat(checkPart.getName()).isEqualTo(part3.getName());
-		assertThat(checkPart.getApplicationVehicle()).isEqualTo(part3.getApplicationVehicle());
-		assertThat(checkPart.getNetWeight()).isEqualTo(part3.getNetWeight());
-		assertThat(checkPart.getGrossWeight()).isEqualTo(part3.getGrossWeight());
+		assertThat(checkPart.getName()).isEqualTo(updatedPart3.getName());
+		assertThat(checkPart.getApplicationVehicle()).isEqualTo(updatedPart3.getApplicationVehicle());
+		assertThat(checkPart.getNetWeight()).isEqualTo(updatedPart3.getNetWeight());
+		assertThat(checkPart.getGrossWeight()).isEqualTo(updatedPart3.getGrossWeight());
 		
 	}
 	
@@ -170,7 +170,7 @@ public class JPAUnitTest {
 	}
 	
 	@Test
-	public void should_delete_all_tutorials() { //9
+	public void should_delete_all_parts() { //9
 		entityManager.persist(new Part("Impulsor de Partida", "Palio", 5.67, 6.54));
 		entityManager.persist(new Part("Polia Rígida", "Celta", 4.56, 5.43));
 		entityManager.persist(new Part("Polia Roda Livre", "Marea", 9.87, 10.98));
