@@ -15,6 +15,10 @@ Recursos disponíveis na API
  - Atualizar peça
  - Deletar peça
  - Deletar todas peças
+ - Cadastrar novo veículo
+ - Buscar/listar veículos
+ - Atualizar e deletar veículo
+ - Relacionar/desrelacionar veículos às peças
  
 O CRUD usa um ambiente de testes unitários com **JUnit** configurado acessando o **banco de dados H2**, usa **Maven** como gerenciador de dependência, e **Java 11** como linguagem.
 
@@ -89,6 +93,15 @@ Ambiente de desenvolvimento **STS 4 - Spring Tool Suite 4** e banco de dados **P
 |DELETE		|/parts		|apagar todas as peças |
 |GET		|/parts?name=[keyword]	|encontre todas as peças cujo nome contém a [palavra-chave] |
 |GET		|/parts?vehicle=[keyword]	|encontre todas as peças cujo veículo de aplicação contém a [palavra-chave] |
+|POST		|/vehicles	|criar um novo veículo |
+|GET		|/vehicles	|recuperar todos os veículos |
+|GET		|/vehicles/:id	|recuperar um veículo por: id |
+|PUT		|/vehicles/:id	|atualizar um veículo por:id |
+|DELETE		|/vehicles/:id	|apagar um veículo por:id |
+|DELETE		|/vehicles	|apagar todos os veículos |
+|GET		|/parts/:partId/vehicles	|listar veículos relacionados a uma peça |
+|POST		|/parts/:partId/vehicles/:vehicleId	|relacionar veículo a uma peça |
+|DELETE		|/parts/:partId/vehicles/:vehicleId	|remover relacionamento entre veículo e peça |
 
 #### Cadastrar uma nova peça
 ```
@@ -207,11 +220,17 @@ Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
 
 ![Tela de cadastro de uma nova peça](https://github.com/tarcnux/parts-catalog/blob/main/images/tela05_add_new_part.png?raw=true)
 
+
+### 06 - Funcionalidades de veículos e relacionamento peça x veículo
+ - É possível cadastrar e listar veículos.
+ - É possível apagar um veículo individualmente ou apagar todos os veículos.
+ - Na tela de detalhe da peça é possível relacionar/desvincular veículos da peça.
+
 ## :memo: ToDo
 
- - [X] Criar uma segunda entidade **vehicle** no banco de dados e fazer o relacionamento entre elas. Ficaria a entidade **part** com um relacionamento de NxN com vehicle. Uma peça pode pertencer a vários veículos e um veículo pode conter várias peças.
- - [X] Criar endpoints no backend para manipular o relacionamento entre as entidades `vehicle` e `part`.
- - [X] Criar novas telas no frontend de manipulação e exibição das entidades `vehicle` e `part`e seus relacionamentos.
+ - [x] Criar uma segunda entidade **vehicle** no banco de dados e fazer o relacionamento entre elas. Ficaria a entidade **part** com um relacionamento de NxN com vehicle. Uma peça pode pertencer a vários veículos e um veículo pode conter várias peças.
+ - [x] Criar endpoints no backend para manipular o relacionamento entre as entidades `vehicle` e `part`.
+ - [x] Criar novas telas no frontend de manipulação e exibição das entidades `vehicle` e `part` e seus relacionamentos.
 
 ## :page_with_curl: Licença
 
