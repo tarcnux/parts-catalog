@@ -21,6 +21,16 @@ export default new Router({
       path: "/add",
       name: "add",
       component: () => import("./components/AddPart")
+    },
+    {
+      path: "/vehicles",
+      name: "vehicles",
+      component: () => import("./components/VehiclesList")
+    },
+    {
+      path: "/vehicles/add",
+      name: "add-vehicle",
+      component: () => import("./components/AddVehicle")
     }
   ]
 });
