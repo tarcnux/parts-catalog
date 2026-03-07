@@ -50,7 +50,7 @@ public class PartController {
 			} else if (vehicle == null) {
 				partRepository.findByNameContainingIgnoreCaseOrderByNameAsc(name).forEach(parts::add);
 			} else {
-				partRepository.findByapplicationVehicleContainingIgnoreCaseOrderByNameAsc(vehicle).forEach(parts::add);
+				partRepository.findByApplicationVehicleContainingIgnoreCaseOrderByNameAsc(vehicle).forEach(parts::add);
 			}
 			
 			if(parts.isEmpty()) {
