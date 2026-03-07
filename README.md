@@ -209,9 +209,9 @@ Importante ter a biblioteca do JUnit no Build Path, como descrito acima.
 
 ## :memo: ToDo
 
- - [ ] Criar uma segunda entidade **vehicle** no banco de dados e fazer o relacionamento entre elas. Ficaria a entidade **part** com um relacionamento de NxN com vehicle. Uma peça pode pertencer a vários veículos e um veículo pode conter várias peças.
- - [ ] Criar endpoints no backend para manipular o relacionamento entre as entidades `vehicle` e `part`.
- - [ ] Criar novas telas no frontend de manipulação e exibição das entidades `vehicle` e `part`e seus relacionamentos.
+ - [X] Criar uma segunda entidade **vehicle** no banco de dados e fazer o relacionamento entre elas. Ficaria a entidade **part** com um relacionamento de NxN com vehicle. Uma peça pode pertencer a vários veículos e um veículo pode conter várias peças.
+ - [X] Criar endpoints no backend para manipular o relacionamento entre as entidades `vehicle` e `part`.
+ - [X] Criar novas telas no frontend de manipulação e exibição das entidades `vehicle` e `part`e seus relacionamentos.
 
 ## :page_with_curl: Licença
 
