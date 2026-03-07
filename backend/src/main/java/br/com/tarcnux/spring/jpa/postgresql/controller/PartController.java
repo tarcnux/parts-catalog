@@ -3,6 +3,7 @@ package br.com.tarcnux.spring.jpa.postgresql.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tarcnux.spring.jpa.postgresql.model.Part;
+import br.com.tarcnux.spring.jpa.postgresql.model.Vehicle;
 import br.com.tarcnux.spring.jpa.postgresql.repository.PartRepository;
+import br.com.tarcnux.spring.jpa.postgresql.repository.VehicleRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -30,21 +33,23 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/api/v1")
 @Api(value = "Part")
 public class PartController {
-	
+
 	@Autowired
 	PartRepository partRepository;
-	
+
+	@Autowired
+	VehicleRepository vehicleRepository;
+
 	@GetMapping("/parts")
 	@ApiOperation(value = "Exibe todas as peças em ordem alfabética")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<List<Part>> getAllParts(
-			@RequestParam(required = false) String name, 
+	public ResponseEntity<List<Part>> getAllParts(@RequestParam(required = false) String name,
 			@RequestParam(required = false) String vehicle) {
-		
+
 		try {
-			
+
 			List<Part> parts = new ArrayList<Part>();
-			
+
 			if (name == null && vehicle == null) {
 				partRepository.findByOrderByNameAsc().forEach(parts::add);
 			} else if (vehicle == null) {
@@ -52,62 +57,54 @@ public class PartController {
 			} else {
 				partRepository.findByApplicationVehicleContainingIgnoreCaseOrderByNameAsc(vehicle).forEach(parts::add);
 			}
-			
-			if(parts.isEmpty()) {
+
+			if (parts.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			
+
 			return new ResponseEntity<List<Part>>(parts, HttpStatus.OK);
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 	}
-	
+
 	@GetMapping("/parts/{id}")
 	@ApiOperation(value = "Exibe uma peça específica")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Part> getPartById(@PathVariable("id") Long id) {
 		Optional<Part> partData = partRepository.findById(id);
-		
+
 		if (partData.isPresent()) {
 			return new ResponseEntity<Part>(partData.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@PostMapping("/parts")
 	@ApiOperation(value = "Cadastra uma peça")
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
 	public ResponseEntity<Part> createPart(@RequestBody Part part) {
 		try {
-			Part _part = partRepository
-					.save(new Part(
-							part.getName(),
-							part.getApplicationVehicle(),
-							part.getNetWeight(),
-							part.getGrossWeight()
-							));
+			Part _part = partRepository.save(new Part(part.getName(), part.getApplicationVehicle(), part.getNetWeight(),
+					part.getGrossWeight()));
 			return new ResponseEntity<Part>(_part, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PutMapping("/parts/{id}")
 	@ApiOperation(value = "Atualiza uma peça específica")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public ResponseEntity<Part> updatePart(
-			@PathVariable("id") Long id,
-			@RequestBody Part part
-			) {
+	public ResponseEntity<Part> updatePart(@PathVariable("id") Long id, @RequestBody Part part) {
 		Optional<Part> partData = partRepository.findById(id);
-		
-		if(partData.isPresent()) {
+
+		if (partData.isPresent()) {
 			Part _part = partData.get();
 			_part.setName(part.getName());
 			_part.setApplicationVehicle(part.getApplicationVehicle());
@@ -118,7 +115,7 @@ public class PartController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@DeleteMapping("/parts/{id}")
 	@ApiOperation(value = "Exclui uma peça")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
@@ -130,7 +127,7 @@ public class PartController {
 			return new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@DeleteMapping("/parts")
 	@ApiOperation(value = "Exclui todas as peças")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
@@ -141,6 +138,51 @@ public class PartController {
 		} catch (Exception e) {
 			return new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@GetMapping("/parts/{partId}/vehicles")
+	@ApiOperation(value = "Lista os veículos relacionados a uma peça")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<Set<Vehicle>> getVehiclesByPart(@PathVariable("partId") Long partId) {
+		Optional<Part> partData = partRepository.findById(partId);
+		if (!partData.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(partData.get().getVehicles(), HttpStatus.OK);
+	}
+
+	@PostMapping("/parts/{partId}/vehicles/{vehicleId}")
+	@ApiOperation(value = "Relaciona um veículo a uma peça")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<Part> addVehicleToPart(@PathVariable("partId") Long partId,
+			@PathVariable("vehicleId") Long vehicleId) {
+		Optional<Part> partData = partRepository.findById(partId);
+		Optional<Vehicle> vehicleData = vehicleRepository.findById(vehicleId);
+
+		if (!partData.isPresent() || !vehicleData.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		Part part = partData.get();
+		part.addVehicle(vehicleData.get());
+		return new ResponseEntity<>(partRepository.save(part), HttpStatus.OK);
+	}
+
+	@DeleteMapping("/parts/{partId}/vehicles/{vehicleId}")
+	@ApiOperation(value = "Remove o relacionamento entre veículo e peça")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<Part> removeVehicleFromPart(@PathVariable("partId") Long partId,
+			@PathVariable("vehicleId") Long vehicleId) {
+		Optional<Part> partData = partRepository.findById(partId);
+		Optional<Vehicle> vehicleData = vehicleRepository.findById(vehicleId);
+
+		if (!partData.isPresent() || !vehicleData.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		Part part = partData.get();
+		part.removeVehicle(vehicleData.get());
+		return new ResponseEntity<>(partRepository.save(part), HttpStatus.OK);
 	}
 
 }
